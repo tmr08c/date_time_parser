@@ -5,7 +5,11 @@ defmodule DateTimeParser.Epoch do
   import DateTimeParser.Formatters, only: [format: 1]
   import DateTimeParser.Combinators.Epoch
 
-  defparsec(:parse, unix_epoch())
+  def parse(
+        %{"second" => second, "separator" => separator, "subsecond" => subsecond} = regex_capture
+      ) do
+    IO.inspect(regex_capture)
+  end
 
   def from_tokens(tokens) do
     with {:ok, datetime} <- DateTime.from_unix(tokens[:unix_epoch]) do
